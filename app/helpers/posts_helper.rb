@@ -1,6 +1,6 @@
 # Helper methods defined here can be accessed in any controller or view in the application
 
-module SampleBlog
+module WhereToGo
   class App
     module PostsHelper
       # feed_tag(:rss, :title => "RSS", :href => url(...))

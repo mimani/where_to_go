@@ -14,9 +14,11 @@ source 'https://rubygems.org'
 gem 'rake'
 
 # Component requirements
-gem 'bcrypt-ruby', :require => 'bcrypt'
+# gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'sass'
-gem 'haml'
+# gem 'haml'
+gem 'rest-client'
+gem 'mysql2'
 gem 'activerecord', '>= 3.1', :require => 'active_record'
 gem 'sqlite3'
 

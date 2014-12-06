@@ -9,11 +9,11 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 3) do
+ActiveRecord::Schema.define(version: 8) do
 
-  create_table "accounts", :force => true do |t|
+  create_table "accounts", force: true do |t|
     t.string "name"
     t.string "surname"
     t.string "email"
@@ -22,7 +22,27 @@ ActiveRecord::Schema.define(:version => 3) do
     t.string "role"
   end
 
-  create_table "posts", :force => true do |t|
+  create_table "attractions", force: true do |t|
+    t.string "attraction"
+    t.string "attraction_holiday_iq_id"
+    t.string "type"
+    t.string "display_name"
+    t.string "city"
+    t.string "rank"
+  end
+
+  create_table "cities", force: true do |t|
+    t.string "city"
+    t.string "city_holiday_iq_id"
+    t.string "state"
+  end
+
+  create_table "city_attraction_mappings", force: true do |t|
+    t.string "city_id"
+    t.string "attraction_id"
+  end
+
+  create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "body"
     t.datetime "created_at"

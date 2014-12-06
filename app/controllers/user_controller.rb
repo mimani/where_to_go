@@ -1,6 +1,7 @@
-SampleBlog::App.controllers :users do
-  get "/", :provides => :json do
-  #   Fetch attraction data for a user
+WhereToGo::App.controllers :users do
+  get "/interests", :provides => :json do
+    user  = User.new()
+    return {:attractions => user.get_attractions}.to_json
   end
 
 end

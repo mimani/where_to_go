@@ -13,23 +13,23 @@
 #     :socket    => '/tmp/mysql.sock'
 #   }
 #
-ActiveRecord::Base.configurations[:development] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', 'development.db')
 
+
+DB_DEFAULTS = {
+    :adapter   => 'mysql2',
+    :encoding  => 'utf8',
+    :reconnect => true,
+    :database  => 'where_to_go',
+    :pool      => 25,
+    :username  => 'root',
+    :password  => '',
+    :host      => 'localhost'
 }
 
-ActiveRecord::Base.configurations[:production] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', 'production.db')
+ActiveRecord::Base.configurations[:development] = DB_DEFAULTS
+ActiveRecord::Base.configurations[:production] = DB_DEFAULTS
+ActiveRecord::Base.configurations[:test] = DB_DEFAULTS
 
-}
-
-ActiveRecord::Base.configurations[:test] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', 'test.db')
-
-}
 
 # Setup our logger
 ActiveRecord::Base.logger = logger
