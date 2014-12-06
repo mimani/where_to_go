@@ -1,6 +1,10 @@
 class Attraction < ActiveRecord::Base
   self.inheritance_column = :_type_disabled
 
+  def url
+    api_client = HolidayIQClient.new
+    api_client.get_attraction_details attraction_holiday_iq_id
+  end
 
   def self.populate
     api_client = HolidayIQClient.new

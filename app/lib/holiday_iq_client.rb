@@ -40,6 +40,24 @@ class HolidayIQClient
     end
   end
 
+
+  def get_attraction_details attraction_id
+    begin
+      url = "http://sandbox.holidayiq.com/attractions/#{attraction_id}"
+      response = RestClient.get url, {"Authorization" => "Basic dGhhY2s6dGhhY2tAaGlx"}
+      parsed_response = JSON.parse(response.body)
+      {:description => parsed_response['description'],
+       :url => parsed_response['bestPhotoUrl'],
+      }
+    rescue RestClient::ResourceNotFound => exception
+      logger.error "ResourceNotFound Exeption"
+      ExceptionHelper.raise_invalid_data_error(exception)
+    rescue Exception => e
+      logger.error "Exeption #{e} "
+      raise InvalidDataError.new({:code => :APL_GET_INVOICE_FAILED, :message => "Exeption"}, 408)
+    end
+  end
+
     def get_attractions city_id
     begin
       data = []
