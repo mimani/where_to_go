@@ -1,9 +1,16 @@
 class FBClient
   attr_reader :access_token, :user_id
+  INTERESTED_CATEGORIES = ['Interest', 'Sport', 'Community']
 
-  def initialize
-    @access_token = 'CAACEdEose0cBAMh18iWemiLHKfHlIgpUX3P3JGY5rMbBDcZC8ARN1GIw6r3ZCH9u8jPv6Cpf82aOWOaLPlSZChevKoIM6ZCbyYYIwNtPjZChgdC6QeUpi503d618ZBOxeZBX3uHRvqp8AKkZClmwO4tDkOERdZAiZB146uDtVEFYP09i44xGYOlqE4ggIOLD0VZAZAIMoMjqDZBHA9qHSrTp9UOrW6Qa5ZA4xwCh8ZD'
-    @user_id = '100000867712264'
+  def initialize access_token, user_id
+    @access_token = access_token
+    @user_id = user_id
+  end
+
+  def get_relevent_likes
+    data = get_interests
+    relevent_data = data.select{|d| INTERESTED_CATEGORIES.include?(d[:category])}
+    relevent_data.map { |r| r[:name]}
   end
 
   def get_interests
@@ -15,12 +22,13 @@ class FBClient
         p "url here #{url}"
         response = RestClient.get url
         parsed_response = JSON.parse(response.body)
-
         likes = parsed_response["data"]
         data += likes.map{|like| { :category => like["category"], :name => like["name"]}}
         if parsed_response["paging"]["next"]
           url = parsed_response["paging"]["next"]
           break unless url
+        else
+          break
         end
       end
       data
@@ -28,8 +36,8 @@ class FBClient
       logger.error "ResourceNotFound Exeption"
       ExceptionHelper.raise_invalid_data_error(exception)
     rescue Exception => e
-      logger.error "Exeption #{e} "
-      raise InvalidDataError.new({:code => :APL_GET_INVOICE_FAILED, :message => "FB Exeption"}, 408)
+      p "Exeption #{e} "
+      raise "FB Exeption"
     end
   end
 

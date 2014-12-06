@@ -24,4 +24,9 @@ class City < ActiveRecord::Base
   def self.save_in_db data
     data.each { |d| d.save! }
   end
+
+  def hotels
+    api_client = HolidayIQClient.new
+    hotels = api_client.get_hotels city_holiday_iq_id
+  end
 end

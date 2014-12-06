@@ -15,14 +15,19 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
+    birch (0.0.8)
     builder (3.2.2)
     daemons (1.1.9)
+    engtagger (0.2.0)
     eventmachine (1.0.3)
     http_router (0.11.1)
       rack (>= 1.0.0)
       url_mount (~> 0.2.1)
     i18n (0.6.11)
     json (1.8.1)
+    linguistics (2.0.3)
+      loggability (~> 0.7)
+    loggability (0.11.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -66,6 +71,7 @@ GEM
     padrino-support (0.12.2)
       activesupport (>= 3.1)
     polyglot (0.3.5)
+    progressbar (0.21.0)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
@@ -75,7 +81,12 @@ GEM
     rest-client (1.7.2)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rubyzip (0.9.9)
+    rwordnet (0.1.3)
     sass (3.4.9)
+    schiphol (1.0.1)
+      progressbar (>= 0.10.0)
+      rubyzip (~> 0.9.9)
     shoulda (3.5.0)
       shoulda-context (~> 1.0, >= 1.0.1)
       shoulda-matchers (>= 1.4.1, < 3.0)
@@ -94,6 +105,10 @@ GEM
     thor (0.18.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
+    treat (2.1.0)
+      birch
+      schiphol
+      yomu
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -101,18 +116,25 @@ GEM
       thread_safe (~> 0.1)
     url_mount (0.2.1)
       rack
+    yomu (0.2.0)
+      json (~> 1.8)
+      mime-types (~> 1.23)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   activerecord (>= 3.1)
+  engtagger
+  linguistics
   mysql2
   padrino (= 0.12.2)
   rack-test
   rake
   rest-client
+  rwordnet
   sass
   shoulda
   sqlite3
   thin
+  treat

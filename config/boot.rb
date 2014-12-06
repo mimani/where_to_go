@@ -6,6 +6,8 @@ PADRINO_ROOT = File.expand_path('../..', __FILE__) unless defined?(PADRINO_ROOT)
 require 'rubygems' unless defined?(Gem)
 require 'bundler/setup'
 Bundler.require(:default, RACK_ENV)
+require 'treat'
+# Treat::Core::Installer.install 'english'
 
 Padrino::Logger::Config[:development][:log_level]  = :devel
 ##

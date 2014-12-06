@@ -13,6 +13,10 @@ source 'https://rubygems.org'
 # Project requirements
 gem 'rake'
 gem 'thin'
+gem 'treat'
+gem 'rwordnet'
+gem 'engtagger'
+gem 'linguistics'
 
 # Component requirements
 # gem 'bcrypt-ruby', :require => 'bcrypt'

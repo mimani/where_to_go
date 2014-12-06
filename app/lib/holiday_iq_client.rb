@@ -82,12 +82,50 @@ class HolidayIQClient
       data
     rescue RestClient::ResourceNotFound => exception
       logger.error "ResourceNotFound Exeption"
-      ExceptionHelper.raise_invalid_data_error(exception)
+      raise "Exeption is #{e}"
     rescue Exception => e
       logger.error "Exeption #{e} "
-      raise InvalidDataError.new({:code => :APL_GET_INVOICE_FAILED, :message => "Exeption"}, 408)
+      raise "Exeption is #{e}"
     end
   end
+
+    def get_hotels city_id
+    begin
+      data = []
+      url = "http://sandbox.holidayiq.com/hotels?destination_id=#{city_id}"
+      while true do
+        p "url here #{url}"
+        response = RestClient.get url, {"Authorization" => "Basic dGhhY2s6dGhhY2tAaGlx"}
+        parsed_response = JSON.parse(response.body)
+
+        attractions = parsed_response["_embedded"]["hotels"]
+        data += attractions.map{|hot| { :id => hot["id"],
+                                        :name => hot["name"],
+                                        :rating => hot["rating"],
+                                        :star_rating => hot["starRating"],
+                                        :url => hot["bestPhotoUrl"],
+                                        :hotel_url => hot["_links"]["self"]["href"],
+                                        :price => hot["price"] ,
+                                        :price_label => hot["priceLabel"],
+                                        :city => hot["destination"]  }}
+        break if data.size > 50
+        if parsed_response["_links"]["next"]
+          url = parsed_response["_links"]["next"]["href"]
+          break unless url
+        else
+          break
+        end
+      end
+      data
+    rescue RestClient::ResourceNotFound => exception
+      logger.error "ResourceNotFound Exeption"
+      raise "Exeption is #{e}"
+    rescue Exception => e
+      logger.error "Exeption #{e} "
+      raise "Exeption is #{e}"
+    end
+  end
+
 
 
 end
