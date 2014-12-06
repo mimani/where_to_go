@@ -1,4 +1,4 @@
-module SampleBlog
+module WhereToGo
   class Admin < Padrino::Application
     use ActiveRecord::ConnectionAdapters::ConnectionManagement
     register Padrino::Mailer

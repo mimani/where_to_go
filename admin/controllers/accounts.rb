@@ -1,4 +1,4 @@
-SampleBlog::Admin.controllers :accounts do
+WhereToGo::Admin.controllers :accounts do
   get :index do
     @title = "Accounts"
     @accounts = Account.all

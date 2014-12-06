@@ -1,4 +1,4 @@
-SampleBlog::Admin.controllers :sessions do
+WhereToGo::Admin.controllers :sessions do
   get :new do
     render "/sessions/new", nil, :layout => false
   end
