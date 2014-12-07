@@ -11,7 +11,7 @@ class User
     p "data is her e #{data.inspect}"
 
     tmp_data = data.map{|d| d.split(' ')}.flatten
-    formatted_data = tmp_data.map{|d| d.gsub(/[^A-Za-z]/, '')}
+    formatted_data = tmp_data.map{|d| d.gsub(/[^A-Za-z]/, '')}.reject(&:blank?)
 
     p " data is here nelkwejtk h #{formatted_data.inspect}"
     p " data 1 is eher data.first.synonyms #{formatted_data.first.synonyms}"
@@ -31,6 +31,11 @@ class User
     attractions = Attraction.get_travel_related_attractions(related_data.flatten.compact.reject(&:blank?))
 
     get_attractions attractions
+  end
+
+  def similar_places
+    tagged_places = fb_client.get_tagged_places
+
   end
 
   def get_attractions attractions
