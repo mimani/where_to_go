@@ -35,7 +35,14 @@ class User
 
   def similar_places
     tagged_places = fb_client.get_tagged_places
-
+    listed_cities = City.find_listed_cities(tagged_places.map { |tp| tp[:city] } )
+    listed_cities.map { |city|
+      type_hash, similar_cities = city.find_similar_cities
+      type_hash.merge({
+                          :tagged_city    => city.city,
+                          :similar_cities => similar_cities
+                      })
+    }
   end
 
   def get_attractions attractions
